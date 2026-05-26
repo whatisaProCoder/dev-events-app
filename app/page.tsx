@@ -1,65 +1,86 @@
-import Image from "next/image";
+import EventCard from "@/components/EventCard";
+import ExploreButton from "@/components/ExploreButton";
 
-export default function Home() {
+const conferenceCards = [
+  {
+    title: "GitHub Universe 2025",
+    slug: "github-universe-2025",
+    location: "San Francisco, CA",
+    date: "28th October 2025",
+    time: "12:25pm - 2:40pm",
+    image: "/images/event1.png",
+  },
+  {
+    title: "Infobip Shift 2025 Conference",
+    slug: "infobip-shift-2025",
+    location: "Zadar, Croatia",
+    date: "13th September 2025",
+    time: "12:25pm - 2:40pm",
+    image: "/images/event2.png",
+  },
+  {
+    title: "React & Frontend Magic",
+    slug: "react-frontend-magic",
+    location: "San Francisco, CA",
+    date: "7th February 2024",
+    time: "12:25pm - 2:40pm",
+    image: "/images/event3.png",
+  },
+  {
+    title: "DevWorld 2025",
+    slug: "devworld-2025",
+    location: "Zadar, Croatia",
+    date: "13th November 2025",
+    time: "10:00am - 2:40pm",
+    image: "/images/event4.png",
+  },
+  {
+    title: "Cloudinary User Summit",
+    slug: "cloudinary-user-summit",
+    location: "The Midway, SF",
+    date: "22th October 2025",
+    time: "12:25pm - 2:40pm",
+    image: "/images/event5.png",
+  },
+  {
+    title: "Vercel Ship 2025",
+    slug: "vercel-ship-2025",
+    location: "New York City",
+    date: "7th February 2025",
+    time: "12:25pm - 2:40pm",
+    image: "/images/event6.png",
+  },
+];
+
+export default function Page() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <section className="mt-20 flex flex-col items-center">
+        <h1 className="text-5xl text-center font-semibold leading-14 max-sm:text-2xl max-sm:leading-6">
+          The Hub for Every Dev <br />
+          <span className="opacity-80">Event You Can’t Miss</span>
+        </h1>
+        <p className="mt-4 max-sm:w-75 text-center">
+          Hackathons, Meetups, and Conferences, All in One Place
+        </p>
+        <ExploreButton className="mt-4" />
+      </section>
+      <section className="mt-10 flex flex-row justify-center items-center p-8">
+        <div className="w-325">
+          <h3 className="font-semibold text-2xl max-sm:text-xl">
+            Featured Events
+          </h3>
+          <ul className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6">
+            {conferenceCards.map((event) => {
+              return (
+                <li key={event.slug}>
+                  <EventCard {...event} />
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
