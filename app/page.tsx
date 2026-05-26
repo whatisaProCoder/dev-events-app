@@ -65,11 +65,14 @@ export default function Page() {
         </p>
         <ExploreButton className="mt-4" />
       </section>
-      <section className="mt-10 flex flex-row justify-center items-center p-8">
+      <section
+        className="mt-10 flex flex-row justify-center items-center p-8"
+        id="events"
+      >
         <div className="w-325">
-          <h3 className="font-semibold text-2xl max-sm:text-xl">
+          <a className="font-semibold text-2xl max-sm:text-xl">
             Featured Events
-          </h3>
+          </a>
           <ul className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6">
             {conferenceCards.map((event) => {
               return (

@@ -21,7 +21,7 @@ const NavBar = () => {
             Home
           </Link>
           <Link
-            href="/"
+            href="/#events"
             className="font-regular text-md flex flex-row gap-3 items-center"
           >
             Events
