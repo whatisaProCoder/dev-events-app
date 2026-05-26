@@ -35,11 +35,11 @@ export default function EventCard({
       </div>
       <div className="mt-2 text-xl">{title}</div>
       <div className="mt-2 flex flex-row gap-3  items-center mb-6">
-        <div className="flex flex-row gap-2 items-center opacity-70">
+        <div className="flex flex-row gap-2 items-center opacity-70 font-light">
           <CalendarRange size={17} /> {date}
         </div>
         <Separator orientation="vertical" />
-        <div className="flex flex-row gap-2 items-center opacity-70">
+        <div className="flex flex-row gap-2 items-center opacity-70 font-light">
           <Timer size={17} /> {time}
         </div>
       </div>

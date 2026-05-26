@@ -55,7 +55,7 @@ const conferenceCards = [
 export default function Page() {
   return (
     <>
-      <section className="mt-20 flex flex-col items-center">
+      <section className="mt-20 max-sm:mt-10 flex flex-col items-center">
         <h1 className="text-5xl text-center font-semibold leading-14 max-sm:text-2xl max-sm:leading-6">
           The Hub for Every Dev <br />
           <span className="opacity-80">Event You Can’t Miss</span>

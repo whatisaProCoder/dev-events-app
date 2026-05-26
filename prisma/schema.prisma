@@ -8,6 +8,10 @@ generator client {
   output   = "../generated/prisma"
 }
 
+generator zod {
+  provider = "prisma-zod-generator"
+}
+
 datasource db {
   provider = "postgresql"
 }
@@ -19,22 +23,28 @@ enum Mode {
 }
 
 model Event {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(100)
-  slug        String   @unique
-  description String   @db.VarChar(1000)
-  overview    String   @db.VarChar(500)
-  image       String
-  venue       String
-  location    String
-  datetime    DateTime
-  mode        Mode
-  audience    String
-  agenda      String[]
-  organizer   String
-  tags        String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id Int @id @default(autoincrement())
+
+  /// @zod.max(100)
+  title String @db.VarChar(100)
+  slug  String @unique
+
+  /// @zod.max(1000)
+  description String @db.VarChar(1000)
+
+  /// @zod.max(500)
+  overview  String   @db.VarChar(500)
+  image     String
+  venue     String
+  location  String
+  datetime  DateTime
+  mode      Mode
+  audience  String
+  agenda    String[]
+  organizer String
+  tags      String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   bookings Booking[]
 }
@@ -45,6 +55,7 @@ model Booking {
   eventId Int
   event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
+  /// @zod.email("Invalid Email Format")
   email     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
