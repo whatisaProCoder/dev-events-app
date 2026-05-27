@@ -15,8 +15,13 @@ import {
   getSimilarEventsBySlug,
 } from "@/lib/actions/event.actions";
 import EventCard from "@/components/EventCard";
+import { Suspense } from "react";
 
-const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+const EventPage = async ({ params }: PageProps) => {
   const { slug } = await params;
 
   const event = await getEventBySlug(slug);
@@ -127,4 +132,14 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 };
 
-export default EventPage;
+export default function PageWrapper({ params }: PageProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="text-center pt-40">Loading event details...</div>
+      }
+    >
+      <EventPage params={params} />
+    </Suspense>
+  );
+}
