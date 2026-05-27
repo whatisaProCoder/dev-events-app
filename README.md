@@ -170,4 +170,27 @@ The `ogl` library is a small, effective WebGL library. It's used in this project
 
 ---
 
+## 5. File-by-File Breakdown
 
+This section provides a more detailed look at the important files and folders in the project.
+
+### Page Routes
+
+- `app/page.tsx`: The home page of the application. It displays a list of all events.
+- `app/events/[slug]/page.tsx`: The detail page for a single event. The `[slug]` is a dynamic parameter representing the event's unique identifier.
+
+### API Routes
+
+- `app/api/events/route.ts`:
+  - `POST`: Creates a new event. This is used by a form on the client-side to submit new event data, including image uploads to Cloudinary.
+
+### Server Actions
+
+Server Actions are the primary way this application handles data fetching from the server and some mutations.
+
+- `lib/actions/event.actions.ts`:
+  - `getEvents`: Fetches all events, ordered by creation date. It uses `unstable_cache` for caching.
+  - `getEventBySlug`: Fetches a single event by its slug, including its bookings. It uses `unstable_cache` for caching.
+  - `getSimilarEventsBySlug`: Fetches events that have similar tags to the given event slug. It uses `unstable_cache` for caching.
+- `lib/actions/booking.actions.ts`:
+  - `createBooking`: Creates a new booking for an event for a given user email.
