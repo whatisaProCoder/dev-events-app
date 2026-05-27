@@ -41,8 +41,9 @@ export default function BookEvent({
         <CardTitle>Book Your Spot</CardTitle>
         {bookings.length > 0 ? (
           <CardDescription>
-            Join {bookings.length} {bookings.length == 1 ? "person" : "people"}{" "}
-            who have already booked their spot
+            Join {bookings.length}{" "}
+            {bookings.length == 1 ? "person who has" : "people who have"}{" "}
+            already booked their spot
           </CardDescription>
         ) : (
           <></>
