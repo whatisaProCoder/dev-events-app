@@ -39,9 +39,11 @@ export async function POST(req: NextRequest) {
 
     const title = result.data.title;
 
-    const slug =
-      title.slice(0, 10).trim().toLowerCase().replace(/\s+/g, "-") +
-      Math.floor(Math.random() * 10000);
+    const slug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-");
 
     const imageFile = formData.get("image") as File;
 
