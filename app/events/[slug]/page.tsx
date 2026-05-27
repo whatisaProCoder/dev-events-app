@@ -38,7 +38,7 @@ const EventPage = async ({ params }: PageProps) => {
       id="events"
     >
       <div className="w-325">
-        <div className="flex flex-row max-md:flex-col gap-12">
+        <div className="flex flex-row max-lg:flex-col gap-12">
           <div>
             <h1 className="text-4xl max-sm:text-3xl font-semibold">
               {event.title}
@@ -107,7 +107,7 @@ const EventPage = async ({ params }: PageProps) => {
             </ul>
           </div>
 
-          <div className="w-150 max-md:w-full">
+          <div className="w-150 max-lg:w-full">
             <BookEvent bookings={event.bookings} slug={event.slug} />
           </div>
         </div>
