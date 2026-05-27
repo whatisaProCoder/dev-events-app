@@ -1,6 +1,6 @@
 # Dev Events App - Codebase Documentation
 
-This document provides a comprehensive overview of the Dev Events App codebase. It's designed to be beginner-friendly, explaining the core concepts and technologies used in this project.
+![Showcase](./public/images/showcase.png)
 
 This project was built following the "Next.js 16 Full Course | Build and Deploy a Production-Ready Full Stack App" by JavaScript Mastery.
 
