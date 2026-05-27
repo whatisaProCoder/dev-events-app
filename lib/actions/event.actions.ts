@@ -27,3 +27,19 @@ export const getSimilarEventsBySlug = unstable_cache(
   ["similar-events-by-slug"],
   { revalidate: 60 },
 );
+
+export const getEvents = unstable_cache(
+  async () => {
+    try {
+      const events = await prisma.event.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+
+      return events;
+    } catch {
+      return [];
+    }
+  },
+  ["all-events"],
+  { revalidate: 60 },
+);

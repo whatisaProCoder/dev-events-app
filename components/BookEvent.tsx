@@ -11,17 +11,28 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Booking } from "@/generated/prisma/client";
 import { useState } from "react";
+import { createBooking } from "@/lib/actions/booking.actions";
 
-export default function BookEvent({ bookings }: { bookings: Booking[] }) {
+export default function BookEvent({
+  slug,
+  bookings,
+}: {
+  bookings: Booking[];
+  slug: string;
+}) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
 
-    setTimeout(() => {
+    const { success, error } = await createBooking({ slug, email });
+
+    if (success) {
       setSubmitted(true);
-    }, 1000);
+    } else {
+      console.error("Booking Creation Failed", error);
+    }
   };
 
   return (

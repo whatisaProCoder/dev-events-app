@@ -12,10 +12,13 @@ import BookEvent from "@/components/BookEvent";
 import { Event } from "@/generated/prisma/client";
 import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import EventCard from "@/components/EventCard";
+import { cacheLife } from "next/cache";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  "use cache";
+  cacheLife("hours");
   const { slug } = await params;
 
   const response = await fetch(`${BASE_URL}/api/events/${slug}`, {
@@ -105,7 +108,7 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
           </div>
 
           <div className="w-150 max-md:w-full">
-            <BookEvent bookings={event.bookings} />
+            <BookEvent bookings={event.bookings} slug={event.slug} />
           </div>
         </div>
         <div className="mt-16">
