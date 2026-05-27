@@ -19,7 +19,7 @@ export default async function Page() {
         <ExploreButton className="mt-4" />
       </section>
       <section
-        className="mt-10 flex flex-row justify-center items-center p-8"
+        className="mt-10 flex flex-row justify-center items-center p-4"
         id="events"
       >
         <div className="w-325">

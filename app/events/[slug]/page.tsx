@@ -34,10 +34,10 @@ const EventPage = async ({ params }: PageProps) => {
 
   return (
     <section
-      className="mt-24 max-sm:mt-30 flex flex-row justify-center items-center p-8"
+      className="mt-24 max-sm:mt-30 flex flex-row justify-center items-center p-4"
       id="events"
     >
-      <div className="w-325 px-8">
+      <div className="w-325 max-sm:w-full">
         <div className="flex flex-row max-lg:flex-col gap-12">
           <div>
             <h1 className="text-4xl max-sm:text-3xl font-semibold">

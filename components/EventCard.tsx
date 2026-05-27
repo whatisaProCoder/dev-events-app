@@ -21,14 +21,15 @@ export default function EventCard({
 }: EventCardProps) {
   return (
     <Link href={`/events/${slug}`}>
-      <Image
-        src={image}
-        alt={title}
-        width={400}
-        height={300}
-        style={{ aspectRatio: "4/3", objectFit: "cover" }}
-        className="rounded-md"
-      />
+      <div style={{ position: "relative", width: "100%", aspectRatio: "4/3" }}>
+        <Image
+          src={image}
+          alt={title}
+          fill
+          style={{ objectFit: "cover" }}
+          className="rounded-md"
+        />
+      </div>
       <div className="mt-4 font-light flex flex-row items-center gap-1 opacity-70">
         <MapPin size={17} /> {location}
       </div>
