@@ -1,15 +1,10 @@
 import EventCard from "@/components/EventCard";
 import ExploreButton from "@/components/ExploreButton";
 import { Event } from "@/generated/prisma/client";
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { getEvents } from "@/lib/actions/event.actions";
 
 export default async function Page() {
-  "use cache";
-  cacheLife("hours");
-  const response = await fetch(`${BASE_URL}/api/events`);
-  const { events } = await response.json();
+  const events = await getEvents();
 
   return (
     <>

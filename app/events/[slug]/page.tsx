@@ -10,21 +10,16 @@ import { notFound } from "next/navigation";
 import { format as dateformat } from "date-fns";
 import BookEvent from "@/components/BookEvent";
 import { Event } from "@/generated/prisma/client";
-import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
+import {
+  getEventBySlug,
+  getSimilarEventsBySlug,
+} from "@/lib/actions/event.actions";
 import EventCard from "@/components/EventCard";
-import { cacheLife } from "next/cache";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const EventPage = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = params;
 
-const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  "use cache";
-  cacheLife("hours");
-  const { slug } = await params;
-
-  const response = await fetch(`${BASE_URL}/api/events/${slug}`, {
-    next: { revalidate: 60 },
-  });
-  const { event } = await response.json();
+  const event = await getEventBySlug(slug);
 
   if (!event) {
     return notFound();

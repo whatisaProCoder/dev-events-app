@@ -1,5 +1,4 @@
 "use server";
-
 import prisma from "../prisma";
 import { unstable_cache } from "next/cache";
 
@@ -25,6 +24,22 @@ export const getSimilarEventsBySlug = unstable_cache(
     }
   },
   ["similar-events-by-slug"],
+  { revalidate: 60 },
+);
+
+export const getEventBySlug = unstable_cache(
+  async (slug: string) => {
+    try {
+      const event = await prisma.event.findUnique({
+        where: { slug },
+        include: { bookings: true },
+      });
+      return event;
+    } catch {
+      return null;
+    }
+  },
+  ["event-by-slug"],
   { revalidate: 60 },
 );
 
