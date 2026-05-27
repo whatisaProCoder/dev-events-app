@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
       cloudinary.uploader
         .upload_stream(
           {
-            folder: "nextjs-dev-events",
+            folder: process.env.CLOUDINARY_FOLDER_NAME,
             resource_type: "image",
           },
           (error, result) => {
