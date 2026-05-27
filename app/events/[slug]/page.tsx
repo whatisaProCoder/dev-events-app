@@ -113,7 +113,7 @@ const EventPage = async ({ params }: PageProps) => {
         </div>
         <div className="mt-16">
           <a className="font-semibold text-2xl max-sm:text-xl">
-            Featured Events
+            Similar Events
           </a>
           <ul className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-6">
             {similarEvents &&
