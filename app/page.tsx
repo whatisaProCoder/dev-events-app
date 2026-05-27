@@ -1,62 +1,20 @@
 import EventCard from "@/components/EventCard";
 import ExploreButton from "@/components/ExploreButton";
+import { Event } from "@/generated/prisma/client";
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
 
-const conferenceCards = [
-  {
-    title: "GitHub Universe 2025",
-    slug: "github-universe-2025",
-    location: "San Francisco, CA",
-    date: "28th October 2025",
-    time: "12:25pm - 2:40pm",
-    image: "/images/event1.png",
-  },
-  {
-    title: "Infobip Shift 2025 Conference",
-    slug: "infobip-shift-2025",
-    location: "Zadar, Croatia",
-    date: "13th September 2025",
-    time: "12:25pm - 2:40pm",
-    image: "/images/event2.png",
-  },
-  {
-    title: "React & Frontend Magic",
-    slug: "react-frontend-magic",
-    location: "San Francisco, CA",
-    date: "7th February 2024",
-    time: "12:25pm - 2:40pm",
-    image: "/images/event3.png",
-  },
-  {
-    title: "DevWorld 2025",
-    slug: "devworld-2025",
-    location: "Zadar, Croatia",
-    date: "13th November 2025",
-    time: "10:00am - 2:40pm",
-    image: "/images/event4.png",
-  },
-  {
-    title: "Cloudinary User Summit",
-    slug: "cloudinary-user-summit",
-    location: "The Midway, SF",
-    date: "22th October 2025",
-    time: "12:25pm - 2:40pm",
-    image: "/images/event5.png",
-  },
-  {
-    title: "Vercel Ship 2025",
-    slug: "vercel-ship-2025",
-    location: "New York City",
-    date: "7th February 2025",
-    time: "12:25pm - 2:40pm",
-    image: "/images/event6.png",
-  },
-];
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function Page() {
+export default async function Page() {
+  "use cache";
+  cacheLife("hours");
+  const response = await fetch(`${BASE_URL}/api/events`);
+  const { events } = await response.json();
+
   return (
     <>
-      <section className="mt-20 max-sm:mt-10 flex flex-col items-center">
-        <h1 className="text-5xl text-center font-semibold leading-14 max-sm:text-2xl max-sm:leading-6">
+      <section className="mt-24 max-sm:mt-44 flex flex-col items-center">
+        <h1 className="text-5xl text-center font-semibold leading-14 max-sm:text-3xl max-sm:leading-9">
           The Hub for Every Dev <br />
           <span className="opacity-80">Event You Can’t Miss</span>
         </h1>
@@ -73,14 +31,16 @@ export default function Page() {
           <a className="font-semibold text-2xl max-sm:text-xl">
             Featured Events
           </a>
-          <ul className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6">
-            {conferenceCards.map((event) => {
-              return (
-                <li key={event.slug}>
-                  <EventCard {...event} />
-                </li>
-              );
-            })}
+          <ul className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-6">
+            {events &&
+              events.length > 0 &&
+              events.map((event: Event) => {
+                return (
+                  <li key={event.slug}>
+                    <EventCard {...event} />
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </section>

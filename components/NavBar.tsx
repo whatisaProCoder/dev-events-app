@@ -4,7 +4,7 @@ import { buttonVariants } from "./ui/button";
 
 const NavBar = () => {
   return (
-    <header className="w-full  px-6 py-4">
+    <header className="w-full  px-6 py-4 fixed top-0 left-0 right-0 z-10">
       <nav className="flex flex-row justify-between max-sm:flex-col max-sm:items-center max-sm:gap-6">
         <Link
           href="/"

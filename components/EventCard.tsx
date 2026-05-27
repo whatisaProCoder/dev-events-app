@@ -2,14 +2,14 @@ import Image from "next/image";
 import { CalendarRange, MapPin, Timer } from "lucide-react";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
+import { format as dateformat } from "date-fns";
 
 interface EventCardProps {
   title: string;
   image: string;
   slug: string;
   location: string;
-  date: string;
-  time: string;
+  datetime: Date;
 }
 
 export default function EventCard({
@@ -17,8 +17,7 @@ export default function EventCard({
   image,
   slug,
   location,
-  date,
-  time,
+  datetime,
 }: EventCardProps) {
   return (
     <Link href={`/events/${slug}`}>
@@ -27,7 +26,7 @@ export default function EventCard({
         alt={title}
         width={400}
         height={300}
-        style={{ width: "100%", height: "auto" }}
+        style={{ aspectRatio: "4/3", objectFit: "cover" }}
         className="rounded-md"
       />
       <div className="mt-4 font-light flex flex-row items-center gap-1 opacity-70">
@@ -36,11 +35,11 @@ export default function EventCard({
       <div className="mt-2 text-xl">{title}</div>
       <div className="mt-2 flex flex-row gap-3  items-center mb-6">
         <div className="flex flex-row gap-2 items-center opacity-70 font-light">
-          <CalendarRange size={17} /> {date}
+          <CalendarRange size={17} /> {dateformat(datetime, "do LLLL yyyy")}
         </div>
         <Separator orientation="vertical" />
         <div className="flex flex-row gap-2 items-center opacity-70 font-light">
-          <Timer size={17} /> {time}
+          <Timer size={17} /> {dateformat(datetime, "p")}
         </div>
       </div>
     </Link>
