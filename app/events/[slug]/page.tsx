@@ -63,23 +63,23 @@ const EventPage = async ({ params }: PageProps) => {
             <ul className="mt-4 flex flex-col gap-2 opacity-80">
               <li className="flex flex-row items-center gap-2">
                 <CalendarRange size={20} />
-                Date: {dateformat(event.datetime, "do LLLL yyyy")}
+                <div>Date: {dateformat(event.datetime, "do LLLL yyyy")}</div>
               </li>
               <li className="flex flex-row items-center gap-2">
                 <Timer size={20} />
-                Time: {dateformat(event.datetime, "p")}
+                <div>Time: {dateformat(event.datetime, "p")}</div>
               </li>
               <li className="flex flex-row items-center gap-2">
                 <MapPin size={20} />
-                Venue: {event.venue}
+                <div>Venue: {event.venue}</div>
               </li>
               <li className="flex flex-row items-center gap-2">
                 <LaptopMinimal size={20} />
-                Mode: {event.mode}
+                <div>Mode: {event.mode}</div>
               </li>
-              <li className="flex flex-row items-center gap-2">
-                <Users size={20} />
-                Audience: {event.audience}
+              <li className="flex flex-row items-start gap-2">
+                <span className="font-semibold">Audience:</span>{" "}
+                {event.audience}
               </li>
             </ul>
 
@@ -95,7 +95,7 @@ const EventPage = async ({ params }: PageProps) => {
             <h2 className="mt-8 text-2xl font-semibold">About the Organizer</h2>
             <p className="mt-4 opacity-80">{event.organizer}</p>
 
-            <ul className="mt-8 flex flex-row gap-2">
+            <ul className="mt-8 flex flex-row flex-wrap gap-2">
               {event.tags.map((tag: string, index: number) => (
                 <div
                   key={`tag-${index}`}
