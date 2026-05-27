@@ -16,8 +16,8 @@ import {
 } from "@/lib/actions/event.actions";
 import EventCard from "@/components/EventCard";
 
-const EventPage = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
 
   const event = await getEventBySlug(slug);
 
